@@ -6,16 +6,13 @@
     <title>Chipmunk Choir Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-    </style>
+	<!--FONTS-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <nav class="navbar">
-        <!-- Navbar content will go here -->
-        Navbar Placeholder
-    </nav>
-
     <div class="main-container">
         <div class="left-panel">
             <textarea class="text-input" id="textInput" placeholder="Enter your text here..."required></textarea>
@@ -54,8 +51,10 @@
                     <!-- Image will go here -->
                     <img src="../static/chip1.png" alt="zacasen_alvin2">
                 </div>
-                <div class="controls">
-					<audio id="audio-player" controls style="display:none;"></audio>
+            </div>
+            <div class="controls-container">
+                 <div class="controls">
+                    <audio id="audio-player" controls style="display:none;"></audio>
                     <button class="play-button">Play</button>
                     <button class="download-button">Download</button>
                     <button class="go-to-card-button" onclick="openCard()">Go To Card</button>

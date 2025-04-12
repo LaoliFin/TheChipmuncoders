@@ -10,6 +10,10 @@ def index():
 	"""Renders the main page."""
 	return render_template('index.html')
 
+@app.route('/card')
+def card():
+	return render_template('card.html')
+
 @app.route('/generate', methods=['POST'])
 def generate_singing():
 	if os.path.exists("output.wav"):

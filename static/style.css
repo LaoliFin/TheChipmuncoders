@@ -1,9 +1,6 @@
-.navbar {
-    width: 100%;
-}
-
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Encode Sans Condensed", sans-serif;
+    /*font-family: 'Plus Jakarta Sans', sans-serif;*/
     background-color: #f0f0f0;
     margin: 0;
     display: flex;
@@ -151,11 +148,11 @@ body {
 }
 
 .plus-jakarta-sans-pisava {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    
+    font-family: "Encode Sans Condensed", sans-serif;
+
     font-optical-sizing: auto;
     /*font-weight: 600;*/
-    font-style: normal;  
+    font-style: normal;
 }
 
 body {
@@ -164,17 +161,9 @@ body {
     min-height: 100vh; /* Ensure body takes full viewport height */
     /*background-color: #cce7c9;*/
     background-color: #D3F0B8;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Encode Sans Condensed", sans-serif;
 }
 
-/* Navbar */
-.navbar {
-    background-color: #aad68c; /* Light grey background */
-    padding: 1rem;
-    border-bottom: 1px solid #dee2e6; /* Subtle border */
-    text-align: center; /* Placeholder text centered */
-    font-size: 150%;
-}
 
 /* Main Content Area */
 .main-container {
@@ -191,12 +180,12 @@ body {
     flex: 50%; /* Take up half the space */
     display: flex;
     flex-direction: column;
-    margin: 1rem; /* Margin around the left panel */
-    margin-left: 0%;
+    margin: 2rem; /* Margin around the left panel */
 }
 
 .text-input {
     /*flex-grow: 100%; /* Allow textarea to fill available vertical space */
+    font-family: "Encode Sans Condensed", sans-serif;
     height: 100%;
     width: 100%;
     padding: 0.5rem;
@@ -225,8 +214,8 @@ body {
     flex: 50%; /* Take up the other half */
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Space between options and output */
-    margin: 1rem; /* Margin around the right panel */
+    gap: 1.5rem; /* Space between options, output, and controls */
+    margin: 2rem; /* Margin around the right panel */
 }
 
 .options-container {
@@ -237,6 +226,8 @@ body {
     background: url(ozadje2.png);
     background-repeat: no-repeat;
     background-size: 100%;
+    font-size: large;
+    font-weight: bold;
 }
 
 .checkbox-group label {
@@ -251,22 +242,21 @@ body {
 
 .output-container {
     display: flex;
-    gap: 1rem; /* Space between image and controls */
-    align-items: center; /* Vertically align items in the middle */
+    /* Removed flex-direction: column */
+    gap: 1rem; /* Space for potential future items */
+    align-items: center; /* Center image vertically */
+    justify-content: center; /* Center image horizontally */
     padding: 1rem;
-    border: 1.5px solid #8dc258;
-    border-radius: 4px;
     flex-grow: 1; /* Allow it to take remaining space */
-    background: url(ozadje2.png);
     /*
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
     background-position: top center;*/
-    
+
     background-repeat: repeat-y;
     background-size: 100% auto;
     background-position: top center;
-    
+
 }
 
 .image-placeholder {
@@ -287,10 +277,24 @@ body {
     object-fit: contain;
 }
 
+/* New container for controls */
+.controls-container {
+    padding: 1rem;
+    border: 1.5px solid #8dc258;
+    border-radius: 4px;
+    background: url(ozadje2.png); /* Same background as options */
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex; /* Added to help center the .controls div */
+    justify-content: center; /* Center the .controls div */
+}
+
 .controls {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 0.5rem; /* Space between buttons */
+    flex-direction: row; /* Align buttons horizontally */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 1rem; /* Space between buttons */
+    /* width: 100%; /* No longer needed as parent centers */
 }
 
 .go-to-card-button,
@@ -329,19 +333,27 @@ body {
     }
 
     .output-container {
-        flex-direction: column; /* Stack image and controls vertically */
-        align-items: stretch; /* Stretch items */
+        /* Keep centering the image */
+        align-items: center;
+        justify-content: center;
     }
 
     .image-placeholder {
         flex-basis: auto; /* Reset basis */
-        width: 100%; /* Take full width */
-        margin-bottom: 1rem; /* Add space below image */
+        width: 80%; /* Adjust width as needed */
+        margin-bottom: 0; /* Remove space below image as controls are separate */
+    }
+
+    .controls-container {
+        /* Adjust padding or other styles for mobile if needed */
+        padding: 0.5rem;
     }
 
     .controls {
         align-items: center; /* Center buttons */
         flex-direction: row; /* Place buttons side-by-side */
         justify-content: center; /* Center buttons horizontally */
+        flex-wrap: wrap; /* Allow buttons to wrap on very small screens */
     }
+    
 }

@@ -2,9 +2,12 @@ from google import genai
 from google.genai import types
 from PIL import Image
 from io import BytesIO
+from dotenv import load_dotenv
+import os
 import base64
 
-client = genai.Client(api_key='AIzaSyD6eObuVt5AkwUVqDjD4zkSp33zZ5qfG_c')
+load_dotenv()
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def generatePrompt(lyrics):
     prompt = "Give me one ai image generating prompt based on this text: " + lyrics
@@ -35,6 +38,6 @@ def generateImage(prompt):
             image.save('gemini-native-image.png')
             image.show()
 
-prompt = generatePrompt("[Verse 1] A long time ago when the Earth was green And there were more kinds of animals than youve ever seen Theyd run around free while the Earth was being born But the loveliest of them all was the Unicorn [Chorus] There were green alligators and long-necked geese Some humpty-backed camels and some chimpanzees Some cats and rats and elephants, but sure as youre born The loveliest of all was the Unicorn")
-
+#prompt = generatePrompt("Sorry, your grandma died. RIP.")
+prompt = generatePrompt("There's a whole lotta shamrocks on a green screen over here")
 generateImage(prompt)
