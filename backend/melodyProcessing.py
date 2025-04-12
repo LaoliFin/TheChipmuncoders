@@ -7,6 +7,7 @@ import requests
 
 def get_song_midi(songdata):
 	id = songdata.get('tune_id')
+	print(id)
 	url = f"https://thesession.org/tunes/{id}/abc"
 	response = requests.get(url)
 	abc_notation = response.text
@@ -20,7 +21,7 @@ def get_song_midi(songdata):
 def get_tune(style):
 	tunes = []
 
-	with open("extras/tunes.json", "r", encoding="utf-8") as songlist:
+	with open("data/tunes.json", "r", encoding="utf-8") as songlist:
 		songs = json.load(songlist)
 		for song in songs:
 			if song.get('type') == style:

@@ -7,7 +7,7 @@ import random
 #ADD DIDDLYDEIDEEDOHS
 #TODO: make it linked to syllables instead
 def make_funny(lyrics):
-    with open('../data/words.json', 'r') as file:
+    with open('data/words.json', 'r') as file:
         data = json.load(file)
 
     tiddles = data['filler_words']
@@ -22,8 +22,9 @@ def make_funny(lyrics):
 
 # REMOVE SPECIAL CHARACTERS
 def remove_special_characters(lyrics):
+    new_lyrics = make_funny(lyrics)
     try:
-        removed_characters = "".join(ch for ch in lyrics if ch.isalnum() or ch.isspace())
+        removed_characters = "".join(ch for ch in new_lyrics if ch.isalnum() or ch.isspace())
         return removed_characters
     except Exception as e:
         print(f"Error: {e}")
@@ -32,8 +33,8 @@ def remove_special_characters(lyrics):
 
 # REPLACE WORDS WITH IRISH ONES
 def irishify(lyrics):
-    new_lyrics = lyrics
-    with open('../data/words.json', 'r') as file:
+    new_lyrics = remove_special_characters(lyrics)
+    with open('data/words.json', 'r') as file:
         data = json.load(file)
     
     changable = data['changable_words']
