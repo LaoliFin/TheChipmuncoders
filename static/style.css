@@ -258,19 +258,26 @@ body {
     border-radius: 4px;
     flex-grow: 1; /* Allow it to take remaining space */
     background: url(ozadje2.png);
+    /*
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: top center;*/
+    
     background-repeat: repeat-y;
-    background-size: 100%;
+    background-size: 100% auto;
+    background-position: top center;
+    
 }
 
 .image-placeholder {
     /*flex-basis: 25%; /* Take roughly half the space */
     height: 50%; /* Example fixed height */
     width: 50%;
-    background-color: #e9ecef; /* Placeholder background */
+    /*background-color: #e9ecef; /* Placeholder background */
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed #ccc;
+    /*border: 1px dashed #ccc;*/
     text-align: center;
 }
 
@@ -286,6 +293,7 @@ body {
     gap: 0.5rem; /* Space between buttons */
 }
 
+.go-to-card-button,
 .play-button,
 .download-button {
     padding: 0.5rem 1rem;
@@ -301,7 +309,12 @@ body {
 }
 
 .download-button {
-    background-color: #ED7A13; /* Teal */
+    background-color: #88c656; /* Teal */
+    color: white;
+}
+
+.go-to-card-button {
+    background-color: #ED7A13;
     color: white;
 }
 
