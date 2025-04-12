@@ -14,7 +14,7 @@
 
     <div class="main-container">
         <div class="left-panel">
-            <textarea class="text-input" placeholder="Enter your text here..."></textarea>
+            <textarea class="text-input" placeholder="Enter your text here..." required></textarea>
             <button class="generate-button">Generate</button>
         </div>
         <div class="right-panel">
@@ -27,6 +27,23 @@
                         <input type="checkbox" name="option2" value="choir"> Choir
                     </label>
                 </div>
+				<div class="style-dropdown">
+					<label for="tune-style">Tune Style:</label>
+					<select id="tune-style">
+						<option value="jig">Jig</option>
+						<option value="reel">Reel</option>
+						<option value="slip jig">Slip Jig</option>
+						<option value="hornpipe">Hornpipe</option>
+						<option value="polka">Polka</option>
+						<option value="slide">Slide</option>
+						<option value="waltz">Waltz</option>
+						<option value="barndance">Barndance</option>
+						<option value="strathspey">Strathspey</option>
+						<option value="three-two">Three-two</option>
+						<option value="mazurka">Mazurka</option>
+						<option value="march">March</option>
+					</select>
+				</div>
             </div>
             <div class="output-container">
                 <div class="image-placeholder">
@@ -34,6 +51,7 @@
                     Image Placeholder
                 </div>
                 <div class="controls">
+					<audio id="audio-player" controls style="display:none;"></audio>
                     <button class="play-button">Play</button>
                     <button class="download-button">Download</button>
                 </div>
@@ -41,6 +59,41 @@
         </div>
     </div>
 
-    <!-- Optional: Add script tags for JS later -->
+    <script>
+		document.querySelector('.generate-button').addEventListener('click', async () => {
+			const text = document.querySelector('.text-input').value;
+			const style = document.getElementById('tune-style').value;
+		
+			const response = await fetch('/generate', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ text: text, style: style })
+			});
+		
+			if (response.ok) {
+				const blob = await response.blob();
+				const url = URL.createObjectURL(blob);
+				
+				const audio = document.getElementById('audio-player');
+				audio.src = url;
+				audio.style.display = 'block';
+				audio.load();
+		
+				document.querySelector('.download-button').setAttribute('href', url);
+				document.querySelector('.download-button').setAttribute('download', 'generated_singing.wav');
+			} else {
+				alert('Failed to generate audio. Please try again.');
+			}
+		});
+		
+		document.querySelector('.play-button').addEventListener('click', () => {
+			const audio = document.getElementById('audio-player');
+			if (audio.src) {
+				audio.play();
+			}
+		});
+	</script>		
 </body>
 </html>
