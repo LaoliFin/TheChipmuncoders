@@ -5,19 +5,30 @@
     box-sizing: border-box;
 }
 
+.plus-jakarta-sans-pisava {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    
+    font-optical-sizing: auto;
+    /*font-weight: 600;*/
+    font-style: normal;  
+}
+
 body {
-    font-family: sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure body takes full viewport height */
+    /*background-color: #cce7c9;*/
+    background-color: #D3F0B8;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: #aad68c; /* Light grey background */
     padding: 1rem;
     border-bottom: 1px solid #dee2e6; /* Subtle border */
     text-align: center; /* Placeholder text centered */
+    font-size: 150%;
 }
 
 /* Main Content Area */
@@ -40,18 +51,19 @@ body {
     flex-grow: 1; /* Allow textarea to fill available vertical space */
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1.5px solid #8dc258;
     border-radius: 4px;
     resize: vertical; /* Allow vertical resize */
     min-height: 200px; /* Minimum height */
     margin-bottom: 0.5rem; /* Space between textarea and button */
+    color: #1e3006;
 }
 
 .generate-button {
     align-self: flex-end; /* Position button to the bottom right */
     padding: 0.5rem 1rem;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #88c656;
     color: white;
     border: none;
     border-radius: 4px;
@@ -69,8 +81,11 @@ body {
 .options-container {
     /* Styles for the container of checkboxes if needed */
     padding: 1rem;
-    border: 1px solid #eee;
+    border: 1.5px solid #8dc258;
     border-radius: 4px;
+    background: url(ozadje2.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .checkbox-group label {
@@ -79,25 +94,39 @@ body {
     cursor: pointer;
 }
 
+.checkbox {
+    background-color: #1e3006;
+}
+
 .output-container {
     display: flex;
     gap: 1rem; /* Space between image and controls */
     align-items: center; /* Vertically align items in the middle */
     padding: 1rem;
-    border: 1px solid #eee;
+    border: 1.5px solid #8dc258;
     border-radius: 4px;
     flex-grow: 1; /* Allow it to take remaining space */
+    background: url(ozadje2.png);
+    background-repeat: repeat-y;
+    background-size: 100%;
 }
 
 .image-placeholder {
-    flex-basis: 50%; /* Take roughly half the space */
-    height: 150px; /* Example fixed height */
+    /*flex-basis: 25%; /* Take roughly half the space */
+    height: 50%; /* Example fixed height */
+    width: 50%;
     background-color: #e9ecef; /* Placeholder background */
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px dashed #ccc;
     text-align: center;
+}
+
+.image-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .controls {
@@ -116,12 +145,12 @@ body {
 }
 
 .play-button {
-    background-color: #28a745; /* Green */
+    background-color: #88c656; /* Green */
     color: white;
 }
 
 .download-button {
-    background-color: #17a2b8; /* Teal */
+    background-color: #ED7A13; /* Teal */
     color: white;
 }
 

@@ -1,0 +1,14 @@
+{
+    "changable_words": [
+      "my", "tea", "wh", "of", "you", "little", "man", "boy", "girl"
+    ],
+    "changed_words": [
+      "me", "tay", "hwh", "o", "ye", "wee", "lad", "boyo", "cailin"
+    ],
+    "filler_words": [
+      "hi de diddley idle dum", "diddley doodle idle dum", "diddley doo ri diddley di day", "ah dee doo", "ah dee doo da day", "ah dee day dee", "too ra loo ra loo ra loo", "riteful riteful tiddy folday", "riteful doldol tiddy folol", "fola doldol da dolda dolday", "mush a ring dum a do dum a dah", "whack fol my daddy o", "wack fol the do fol the diddle idle ay", "whack fol the diddle all the di do day" 
+    ],
+    "syllables": [
+      7, 7, 10, 3, 5, 4, 7, 7, 7, 9, 6, 9, 9
+    ]
+}
