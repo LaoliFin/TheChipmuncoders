@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from backend.melodyProcessing import get_song_midi, get_tune, synthesize_singing
+from backend.melodyProcessing import get_tune, synthesize_singing, transpose_down
 from backend.lyricsParser import irishify
 import os
 
@@ -27,6 +27,7 @@ def generate_singing():
 		f.write(lyrics)
 
 	melody_file = get_tune(style)
+	melody_file = transpose_down(melody_file)
 	generated_singing = "output.wav"
 	synthesize_singing(melody_file, lyrics_file, generated_singing)
 

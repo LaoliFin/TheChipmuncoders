@@ -1,6 +1,6 @@
 import random
 import json
-from music21 import converter
+from music21 import converter, interval
 import subprocess
 import os
 import requests
@@ -41,3 +41,11 @@ def synthesize_singing(midi, lyrics, output):
 	if os.path.exists("voice.wav"):
 		os.rename("voice.wav", output)
 	return
+
+def transpose_down(midi):
+	high_midi = converter.parse(midi)
+	octave_down = interval.Interval(-12)
+
+	low_midi = high_midi.transpose(octave_down)
+	low_midi.write("midi", fp = midi)
+	return midi
