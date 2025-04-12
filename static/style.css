@@ -1,0 +1,154 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6; /* Subtle border */
+    text-align: center; /* Placeholder text centered */
+}
+
+/* Main Content Area */
+.main-container {
+    display: flex;
+    flex: 1; /* Allow main container to grow and fill available space */
+    padding: 1rem; /* Add some padding around the main content */
+    gap: 1rem; /* Space between left and right panels */
+}
+
+/* Left Panel (Text Input) */
+.left-panel {
+    flex: 1; /* Take up half the space */
+    display: flex;
+    flex-direction: column;
+    margin: 1rem; /* Margin around the left panel */
+}
+
+.text-input {
+    flex-grow: 1; /* Allow textarea to fill available vertical space */
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resize */
+    min-height: 200px; /* Minimum height */
+    margin-bottom: 0.5rem; /* Space between textarea and button */
+}
+
+.generate-button {
+    align-self: flex-end; /* Position button to the bottom right */
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Right Panel (Options & Output) */
+.right-panel {
+    flex: 1; /* Take up the other half */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between options and output */
+    margin: 1rem; /* Margin around the right panel */
+}
+
+.options-container {
+    /* Styles for the container of checkboxes if needed */
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.checkbox-group label {
+    display: block; /* Place checkboxes one above the other */
+    margin-bottom: 0.5rem; /* Space between checkboxes */
+    cursor: pointer;
+}
+
+.output-container {
+    display: flex;
+    gap: 1rem; /* Space between image and controls */
+    align-items: center; /* Vertically align items in the middle */
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    flex-grow: 1; /* Allow it to take remaining space */
+}
+
+.image-placeholder {
+    flex-basis: 50%; /* Take roughly half the space */
+    height: 150px; /* Example fixed height */
+    background-color: #e9ecef; /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ccc;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 0.5rem; /* Space between buttons */
+}
+
+.play-button,
+.download-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    min-width: 100px; /* Ensure buttons have some width */
+}
+
+.play-button {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.download-button {
+    background-color: #17a2b8; /* Teal */
+    color: white;
+}
+
+/* Basic Responsiveness */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Stack panels vertically on smaller screens */
+    }
+
+    .left-panel, .right-panel {
+        margin: 0.5rem; /* Reduce margin on smaller screens */
+    }
+
+    .output-container {
+        flex-direction: column; /* Stack image and controls vertically */
+        align-items: stretch; /* Stretch items */
+    }
+
+    .image-placeholder {
+        flex-basis: auto; /* Reset basis */
+        width: 100%; /* Take full width */
+        margin-bottom: 1rem; /* Add space below image */
+    }
+
+    .controls {
+        align-items: center; /* Center buttons */
+        flex-direction: row; /* Place buttons side-by-side */
+        justify-content: center; /* Center buttons horizontally */
+    }
+}
