@@ -1,3 +1,7 @@
+.navbar {
+    width: 100%;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: #f0f0f0;
@@ -175,27 +179,33 @@ body {
 /* Main Content Area */
 .main-container {
     display: flex;
-    flex: 1; /* Allow main container to grow and fill available space */
+    flex-grow: 1;
+    width: 100%;
+    height: 90%;
     padding: 1rem; /* Add some padding around the main content */
     gap: 1rem; /* Space between left and right panels */
 }
 
 /* Left Panel (Text Input) */
 .left-panel {
-    flex: 1; /* Take up half the space */
+    flex: 50%; /* Take up half the space */
     display: flex;
     flex-direction: column;
     margin: 1rem; /* Margin around the left panel */
+    margin-left: 0%;
 }
 
 .text-input {
-    flex-grow: 1; /* Allow textarea to fill available vertical space */
+    /*flex-grow: 100%; /* Allow textarea to fill available vertical space */
+    height: 100%;
+    width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1.5px solid #8dc258;
     border-radius: 4px;
     resize: vertical; /* Allow vertical resize */
     min-height: 200px; /* Minimum height */
+    min-width: fit-content;
     margin-bottom: 0.5rem; /* Space between textarea and button */
     color: #1e3006;
 }
@@ -212,7 +222,7 @@ body {
 
 /* Right Panel (Options & Output) */
 .right-panel {
-    flex: 1; /* Take up the other half */
+    flex: 50%; /* Take up the other half */
     display: flex;
     flex-direction: column;
     gap: 1rem; /* Space between options and output */
