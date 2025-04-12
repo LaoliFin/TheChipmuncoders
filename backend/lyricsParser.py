@@ -1,7 +1,24 @@
 import json
 import re
+import random
 # RAZDELI PO VERZIH
 
+
+#ADD DIDDLYDEIDEEDOHS
+#TODO: make it linked to syllables instead
+def make_funny(lyrics):
+    with open('../data/words.json', 'r') as file:
+        data = json.load(file)
+
+    tiddles = data['filler_words']
+    tiddles_iter = iter(tiddles)
+
+    def insert_word(match):
+        word = random.choice(tiddles)
+        return f".{word}{match.group(1)}"
+
+    modified = re.sub(r'\.(\S)', insert_word, lyrics)
+    return modified
 
 # REMOVE SPECIAL CHARACTERS
 def remove_special_characters(lyrics):
@@ -28,5 +45,4 @@ def irishify(lyrics):
     return new_lyrics
 
 # ADD FIXES FOR PRONOUNCIATION
-
-print(irishify(remove_special_characters("Hello... tes!t tes?t te#st my My MY tea wh of you little man boy")))
+print(irishify(remove_special_characters(make_funny("Hello... tes!t tes?t te#st my My MY tea wh of you. little man boy"))))
