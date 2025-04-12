@@ -18,8 +18,8 @@
 
     <div class="main-container">
         <div class="left-panel">
-            <textarea class="text-input" placeholder="Enter your text here..."></textarea>
-            <button class="generate-button">Generate</button>
+            <textarea class="text-input" id="textInput" placeholder="Enter your text here..."></textarea>
+            <button class="generate-button" onclick="openCard()">Generate</button>
         </div>
         <div class="right-panel">
             <div class="options-container">
@@ -45,6 +45,10 @@
         </div>
     </div>
 
-    <!-- Optional: Add script tags for JS later -->
+    <script>
+        function openCard() {
+            window.open('/card', '_blank');
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open card</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="front">
+                <img src="{{ url_for('static', filename='alvin.jpg') }}" alt="Card Image">
+                <div class="page-turn"></div>
+            </div>
+            <div class="back">
+                <div class="left">
+                    <img src="{{ url_for('static', filename='alvin.jpg') }}" alt="Card Image">
+                </div>
+                <div class="right">
+                    <p id="cardText">This is where the text from index.html will go.</p>
+                </div>
+            </div>
+        </div>
+        <button id="downloadButton">Download</button>
+    </div>
+
+    <script>
+        const pageTurn = document.querySelector('.page-turn');
+        const card = document.querySelector('.card');
+        const cardText = document.getElementById('cardText');
+        const downloadButton = document.getElementById('downloadButton');
+
+        pageTurn.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+        });
+
+        async function fetchText() {
+            try {
+                const response = await fetch('/index'); // Fetch the entire index.html
+                const html = await response.text();
+
+                // Create a temporary DOM to parse the fetched HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // Extract the text from the input field (assuming it has an ID 'textInput')
+                const textInput = doc.getElementById('textInput');
+                const text = textInput ? textInput.value : "No text found in index.html";
+
+                cardText.textContent = text;
+            } catch (error) {
+                console.error("Error fetching text:", error);
+                cardText.textContent = "Failed to load text.";
+            }
+        }
+
+        fetchText();
+
+        downloadButton.addEventListener('click', () => {
+            // Implement download functionality here (e.g., using canvas to create an image)
+            alert('Download functionality not implemented yet.');
+        });
+    </script>
+</body>
+</html>
