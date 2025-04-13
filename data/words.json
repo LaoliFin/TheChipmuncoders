@@ -1,14 +1,30 @@
 {
     "changable_words": [
-      "my", "tea", "wh", "of", "you", "little", "man", "boy", "girl"
+      "my", "tea", "wh", "of", "you", "little", "man", "boy", "girl", "men", "girls"
     ],
     "changed_words": [
-      "me", "tay", "hwh", "o", "ye", "wee", "lad", "boyo", "cailin"
+      "me", "tay", "hwh", "o", "ye", "wee", "lad", "boyo", "cailin", "lads", "lassies"
     ],
     "filler_words": [
-      "hi de diddley idle dum", "diddley doodle idle dum", "diddley doo ri diddley di day", "ah dee doo", "ah dee doo da day", "ah dee day dee", "too ra loo ra loo ra loo", "riteful riteful diddy folday", "riteful doldol diddy folol", "fola doldol da dolda dolday", "mush a ring dum a do dum a dah", "whack fol my daddy o", "wack fol the do fol the diddle idle ay", "whack fol the diddle all the di do day" 
+		"oh",
+		"la",
+		"weigh hey",
+		"ah dee doo",
+		"ah dee day dee", 
+		"ah dee doo da day",
+		"whack fol my daddy o", 
+		"hi de diddley idle dum",
+		"diddley doodle idle dum",
+		"too ra loo ra loo ra loo",
+		"riteful riteful tiddy folday",  
+		"riteful doldol tiddy folol",
+		"diddley doo ri diddley di day", 
+		"fola doldol da dolda dolday", 
+		"mush a ring dum a do dum a dah", 
+		"wack fol the do fol the diddle idle ay",
+		"whack fol the diddle all the di do day"
     ],
     "syllables": [
-      7, 7, 10, 3, 5, 4, 7, 7, 7, 9, 6, 9, 9
+      1, 1, 2, 3, 4, 5, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10
     ]
 }
