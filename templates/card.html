@@ -39,7 +39,6 @@
     <script>
         const pageTurn = document.querySelectorAll('.page-turn');
         const card = document.querySelector('.card');
-        const cardText = document.getElementById('cardText');
         const downloadButton = document.getElementById('downloadButton');
 
         pageTurn.forEach(turn => {
@@ -48,27 +47,6 @@
             });
         });
 
-        async function fetchText() {
-            try {
-                const response = await fetch('/index'); // Fetch the entire index.html
-                const html = await response.text();
-
-                // Create a temporary DOM to parse the fetched HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-
-                // Extract the text from the input field (assuming it has an ID 'textInput')
-                const textInput = doc.getElementById('textInput');
-                const text = textInput ? textInput.value : "No text found in index.html";
-
-                cardText.textContent = text;
-            } catch (error) {
-                console.error("Error fetching text:", error);
-                cardText.textContent = "Failed to load text.";
-            }
-        }
-
-        fetchText();
 
         downloadButton.addEventListener('click', () => {
             // Implement download functionality here (e.g., using canvas to create an image)
