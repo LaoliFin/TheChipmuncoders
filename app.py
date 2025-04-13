@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, send_file
 from backend.melodyProcessing import get_tune, synthesize_singing, transpose_down
 from backend.lyricsParser import irishify
 from backend.imageGenerator import generateImage
+from backend.postProcessing import chipmunkify
+import shutil
 import os
 
 app = Flask(__name__)
@@ -49,6 +51,12 @@ def generate_singing():
 		print(f"[ERROR] Synthesis failed: {e}")
 	generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
 
+	chipmunk_mode = 'chipmunk_mode' in request.form
+	if chipmunk_mode:
+		chipmunk_output="chipmunk_output.wav"
+		chipmunkify(generated_singing, chipmunk_output)
+		generated_singing = chipmunk_output
+	
 	#if os.path.exists(lyrics_file):
 	#	os.remove(lyrics_file)
 	if os.path.exists(melody_file):
