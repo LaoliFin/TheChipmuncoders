@@ -1,6 +1,4 @@
-# TheChipmuncoders
-## TITLE
-Folkify
+# TheChipmuncoders: FOLKIFY
 
 ## ABOUT
 Our project is a website called FOLKIFY that creates digital greeting cards in a fun and innovative way. The user inputs a personal message they want to send to someone, and our app transforms it into a musical experience by generating a song based on real traditional Irish folk melodies.
