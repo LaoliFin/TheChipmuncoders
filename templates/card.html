@@ -6,65 +6,82 @@
     <title>Open card</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
-    <div class="card-container">
+    <div class="back-button">
+        <button class="back-to-index-button all-buttons" onclick="window.location.href = '/';">Back</button>
+    </div>
+        <div class="card-container">
+        
         <div class="card">
             <div class="front">
-                <img src="{{ url_for('static', filename='alvin.jpg') }}" alt="Card Image">
+                <img src="{{ url_for('static', filename='ai_image.png') }}" alt="Card Image">
                 <div class="page-turn"></div>
             </div>
-            <div class="back">
+            <div id = "back" class="back">
                 <div class="left">
-                    <img src="{{ url_for('static', filename='alvin.jpg') }}" alt="Card Image">
+                    <img id="backImage" src="{{ url_for('static', filename='ai_image.png') }}" alt="Card Image">
+                    <div class="page-turn"></div>
                 </div>
                 <div class="right">
-                    <p id="cardText">This is where the text from index.html will go.</p>
+                    <p id="cardText">{{ lyrics }}</p>
                 </div>
             </div>
         </div>
-        <button id="downloadButton">Download</button>
+       <button id="downloadButton" class="download-button-two all-buttons" disabled>Download</button> 
     </div>
+        
+    
 
     <script>
-        const pageTurn = document.querySelector('.page-turn');
+        const pageTurn = document.querySelectorAll('.page-turn');
         const card = document.querySelector('.card');
-        const cardText = document.getElementById('cardText');
         const downloadButton = document.getElementById('downloadButton');
 
-        pageTurn.addEventListener('click', () => {
-            card.classList.toggle('flipped');
+        pageTurn.forEach(turn => {
+            turn.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+                downloadButton.disabled = false;  
+            });
         });
 
-        async function fetchText() {
-            try {
-                const response = await fetch('/index'); // Fetch the entire index.html
-                const html = await response.text();
 
-                // Create a temporary DOM to parse the fetched HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
+        downloadButton.addEventListener('click', async () => {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
 
-                // Extract the text from the input field (assuming it has an ID 'textInput')
-                const textInput = doc.getElementById('textInput');
-                const text = textInput ? textInput.value : "No text found in index.html";
+            // First page: image
+            const backImage = document.getElementById('backImage');
+            const imgCanvas = await html2canvas(backImage, { useCORS: true });
+            const imgData = imgCanvas.toDataURL('image/png');
 
-                cardText.textContent = text;
-            } catch (error) {
-                console.error("Error fetching text:", error);
-                cardText.textContent = "Failed to load text.";
-            }
-        }
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
 
-        fetchText();
+            const imgRatio = imgCanvas.width / imgCanvas.height;
+            const newImgHeight = pdfWidth / imgRatio;
 
-        downloadButton.addEventListener('click', () => {
-            // Implement download functionality here (e.g., using canvas to create an image)
-            alert('Download functionality not implemented yet.');
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, newImgHeight);
+
+            // Second page: text
+            pdf.addPage();
+            const text = document.getElementById('cardText').innerText;
+
+            // Attempt to use a custom font (fallbacks to default if needed)
+            pdf.setFont('Caveat', 'normal'); // Font name must be embedded to actually show
+            pdf.setFontSize(20);
+            pdf.text(text, 20, 40);
+
+            pdf.save('card.pdf');
         });
+
     </script>
 </body>
 </html>

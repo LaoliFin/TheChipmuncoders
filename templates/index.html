@@ -16,7 +16,7 @@
     <div class="main-container">
         <div class="left-panel">
             <textarea class="text-input" id="textInput" placeholder="Enter your text here..."required></textarea>
-            <button class="generate-button" >Generate</button>
+            <button class="generate-button all-buttons" >Generate</button>
         </div>
         <div class="right-panel">
             <div class="options-container">
@@ -30,40 +30,47 @@
                 </div>
 				<div class="style-dropdown">
 					<label for="tune-style">Tune Style:</label>
-					<select id="tune-style">
-						<option value="jig">Jig</option>
-						<option value="reel">Reel</option>
-						<option value="slip jig">Slip Jig</option>
-						<option value="hornpipe">Hornpipe</option>
-						<option value="polka">Polka</option>
-						<option value="slide">Slide</option>
-						<option value="waltz">Waltz</option>
-						<option value="barndance">Barndance</option>
-						<option value="strathspey">Strathspey</option>
-						<option value="three-two">Three-two</option>
-						<option value="mazurka">Mazurka</option>
-						<option value="march">March</option>
-					</select>
+					<div class="select-wrapper">
+						<select id="tune-style">
+							<option value="jig">Jig</option>
+							<option value="reel">Reel</option>
+							<option value="slip jig">Slip Jig</option>
+							<option value="hornpipe">Hornpipe</option>
+							<option value="polka">Polka</option>
+							<option value="slide">Slide</option>
+							<option value="waltz">Waltz</option>
+							<option value="barndance">Barndance</option>
+							<option value="strathspey">Strathspey</option>
+							<option value="three-two">Three-two</option>
+							<option value="mazurka">Mazurka</option>
+							<option value="march">March</option>
+						</select>
+					</div>
 				</div>
             </div>
             <div class="output-container">
                 <div class="image-placeholder">
                     <!-- Image will go here -->
-                    <img src="../static/chip1.png" alt="zacasen_alvin2">
+					<div class="audio-wrapper" id="audio-wrapper" style="display:none;">
+						<audio id="audio-player" controls></audio>
+					</div>
+                    <img id="chipmunk" src="../static/chip1.png" alt="chippy">
                 </div>
             </div>
             <div class="controls-container">
                  <div class="controls">
-                    <audio id="audio-player" controls style="display:none;"></audio>
-                    <button class="play-button">Play</button>
-                    <button class="download-button">Download</button>
-                    <button class="go-to-card-button" onclick="openCard()">Go To Card</button>
+                    <!--<button class="play-button all-buttons">Play</button>-->
+                    <button id="download-button" class="download-button all-buttons">Download</button>
+					<a id="hidden-download-link" style="display: none;"></a>
+                    <button class="go-to-card-button all-buttons" onclick="window.location.href = '/card';">Go To Card</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+		let audioURL = null; // global reference to the blob URL
+
 		document.querySelector('.generate-button').addEventListener('click', async () => {
 			const text = document.querySelector('.text-input').value;
 			const style = document.getElementById('tune-style').value;
@@ -78,30 +85,71 @@
 		
 			if (response.ok) {
 				const blob = await response.blob();
-				const url = URL.createObjectURL(blob);
+				audioURL = URL.createObjectURL(blob);
 				
 				const audio = document.getElementById('audio-player');
-				audio.src = url;
-				audio.style.display = 'block';
+				const audioWrapper = document.getElementById('audio-wrapper');
+				audio.src = audioURL;
+				audioWrapper.style.display = 'block';
 				audio.load();
 		
-				document.querySelector('.download-button').setAttribute('href', url);
-				document.querySelector('.download-button').setAttribute('download', 'generated_singing.wav');
+				//document.querySelector('.download-button').setAttribute('href', audioURL);
+				//document.querySelector('.download-button').setAttribute('download', 'generated_singing.wav');
 			} else {
 				alert('Failed to generate audio. Please try again.');
 			}
 		});
 		
-		document.querySelector('.play-button').addEventListener('click', () => {
+		/*document.querySelector('.play-button').addEventListener('click', () => {
 			const audio = document.getElementById('audio-player');
 			if (audio.src) {
 				audio.play();
 			}
-		});
+		});*/
 
         function openCard() {
             window.open('/card', '_blank');
         }
+
+		/* AUDIO ANIMATION LOGIC */
+		const audio = document.getElementById('audio-player');
+		const image = document.getElementById('chipmunk');
+
+		let animationInterval;
+		let currentFrame = 0;
+		const frames = ["../static/chip2.png", "../static/chip3.png"];
+
+		function startAnimation() {
+			console.log("Animation starting");
+			animationInterval = setInterval(() => {
+			currentFrame = (currentFrame + 1) % frames.length;
+			image.src = frames[currentFrame];
+			}, 200); // Change every 300ms (adjust as needed)
+		}
+
+		
+		function stopAnimation() {
+			console.log("Animation stopping");
+			clearInterval(animationInterval);
+			image.src = "../static/chip1.png"; // Reset to default image
+		}
+
+		audio.addEventListener('play', startAnimation);
+		audio.addEventListener('pause', stopAnimation);
+		audio.addEventListener('ended', stopAnimation);
+
+		document.getElementById('download-button').addEventListener('click', () => {
+			if (!audioURL) {
+				alert('No audio file available yet!');
+				return;
+			}
+
+			const hiddenLink = document.getElementById('hidden-download-link');
+			hiddenLink.href = audioURL;
+			hiddenLink.download = 'generated_singing.wav';
+			hiddenLink.click(); // simulate click to download
+		});
+
 	</script>		
 </body>
 </html>

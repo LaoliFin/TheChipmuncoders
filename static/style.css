@@ -7,6 +7,16 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-image: url(background.png);
+    background-size: 50%;
+    
+}
+
+.caveat-pisavaCard {
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .card-container {
@@ -44,14 +54,21 @@ body {
 }
 
 .front {
-    background-color: #fff;
+    background-color: #fbeee0;
     z-index: 2;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
 
 .back {
-    background-color: #eee;
+    background-color: #fbeee0;
     transform: rotateY(180deg);
     display: flex;
+    z-index: 2;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    font-family: "Caveat", cursive;
+    font-size: 22px;
 }
 
 .back .left {
@@ -86,28 +103,15 @@ body {
     height: 0;
     border-style: solid;
     border-width: 0 50px 50px 0;
-    border-color: transparent #ccc transparent transparent;
+    border-color: transparent #ED7A13 transparent transparent;
     cursor: pointer;
     transition: border-color 0.3s ease;
 }
 
 .page-turn:hover {
-    border-color: transparent #999 transparent transparent;
+    border-color: transparent #84440c transparent transparent;
 }
 
-#downloadButton {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-}
 
 /* Responsive Design */
 @media (max-width: 600px) {
@@ -135,10 +139,6 @@ body {
     .page-turn {
         border-width: 0 30px 30px 0;
     }
-
-    #downloadButton {
-        font-size: 1em;
-    }
 }
 /* Basic Reset */
 * {
@@ -160,7 +160,7 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Ensure body takes full viewport height */
     /*background-color: #cce7c9;*/
-    background-color: #D3F0B8;
+    background-color: #fbeee0;
     font-family: "Encode Sans Condensed", sans-serif;
 }
 
@@ -189,8 +189,10 @@ body {
     height: 100%;
     width: 100%;
     padding: 0.5rem;
-    font-size: 1rem;
-    border: 1.5px solid #8dc258;
+    font-weight: 600;
+    color: #422800;
+    border: 1.5px solid #422800;
+    font-size: large;
     border-radius: 4px;
     resize: vertical; /* Allow vertical resize */
     min-height: 200px; /* Minimum height */
@@ -199,11 +201,17 @@ body {
     color: #1e3006;
 }
 
+.text-input:focus {
+    outline: none; /* remove default blue glow */
+    border-color: #88c656;
+    box-shadow: 0 0 0 2px #88c65644; /* optional soft glow */
+}
+
 .generate-button {
     align-self: flex-end; /* Position button to the bottom right */
     padding: 0.5rem 1rem;
     cursor: pointer;
-    background-color: #88c656;
+    background-color: #fbeee0;
     color: white;
     border: none;
     border-radius: 4px;
@@ -221,13 +229,14 @@ body {
 .options-container {
     /* Styles for the container of checkboxes if needed */
     padding: 1rem;
-    border: 1.5px solid #8dc258;
+    border: 1.5px solid #422800;
     border-radius: 4px;
-    background: url(ozadje2.png);
+    background: white;
+    font-weight: 600;
+    color: #422800;
     background-repeat: no-repeat;
     background-size: 100%;
     font-size: large;
-    font-weight: bold;
 }
 
 .checkbox-group label {
@@ -261,8 +270,8 @@ body {
 
 .image-placeholder {
     /*flex-basis: 25%; /* Take roughly half the space */
-    height: 50%; /* Example fixed height */
-    width: 50%;
+    height: 100%; /* Example fixed height */
+    width: 100%;
     /*background-color: #e9ecef; /* Placeholder background */
     display: flex;
     align-items: center;
@@ -280,9 +289,9 @@ body {
 /* New container for controls */
 .controls-container {
     padding: 1rem;
-    border: 1.5px solid #8dc258;
+    border: none;
     border-radius: 4px;
-    background: url(ozadje2.png); /* Same background as options */
+    background: none; /* Same background as options */
     background-repeat: no-repeat;
     background-size: 100%;
     display: flex; /* Added to help center the .controls div */
@@ -307,20 +316,212 @@ body {
     min-width: 100px; /* Ensure buttons have some width */
 }
 
-.play-button {
-    background-color: #88c656; /* Green */
+/*.play-button {
+    background-color: #88c656;
     color: white;
+}*/
+
+
+/* CSS */
+.all-buttons {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.all-buttons:hover {
+  background-color: #fff;
+}
+
+.all-buttons:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .all-buttons {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.back-button {
+    display: flex;         /* Arrange children side by side */
+    align-items: center;   /* Align vertically */
+    gap: 1rem;             /* Optional space between button and content */
+}
+
+.download-button-two {
+    /*margin-bottom: 20px;*/
+    margin-top: -10px;
+    background-color: #88c656; 
+    color: white;
+    float: right;
+}
+.download-button-two:hover {
+    background-color: #354f21;
 }
 
 .download-button {
-    background-color: #88c656; /* Teal */
+    background-color: #88c656; 
     color: white;
 }
+
+.download-button:hover {
+    background-color: #354f21;
+  }
 
 .go-to-card-button {
     background-color: #ED7A13;
     color: white;
 }
+
+.go-to-card-button:hover {
+    background-color: #84440c;
+}
+
+.back-to-index-button {
+    background-color: #ED7A13;
+    color: white;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+.back-to-index-button:hover {
+    background-color: #84440c;
+}
+
+/* Wrapper around the select to contain the arrow */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown select styles */
+#tune-style {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    color: #422800;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 18px;
+    padding-right: 40px; /* Leave room for the arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-align: center;
+    text-align-last: center;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Arrow positioned on the edge of the select */
+.select-wrapper::after {
+    content: "▼";
+    font-size: 14px;
+    color: #422800;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Label styling */
+.style-dropdown label {
+    font-weight: 600;
+    color: #422800;
+    margin-right: 0.5rem;
+}
+
+/* Dropdown layout */
+.style-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Hover and focus effects */
+#tune-style:hover {
+    background-color: #fff;
+}
+
+#tune-style:focus {
+    outline: none;
+    box-shadow: #422800 2px 2px 0 0;
+}
+
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #422800;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* When checked: brown background */
+input[type="checkbox"]:checked {
+    background-color: #422800;
+}
+
+/* Optional: add a smooth little "checkmark dot" inside */
+input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease;
+}
+
+/* Show the inner dot only when checked */
+input[type="checkbox"]:checked::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.audio-wrapper {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: #422800 4px 4px 0 0;
+    margin-bottom: 1rem;
+}
+
+#audio-player {
+    width: 100%;
+    accent-color: #422800;
+}
+
 
 /* Basic Responsiveness */
 @media (max-width: 768px) {
