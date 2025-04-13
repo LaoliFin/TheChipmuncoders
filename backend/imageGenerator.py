@@ -35,9 +35,9 @@ def generateImage(prompt):
             print(part.text)
         elif part.inline_data is not None:
             image = Image.open(BytesIO((part.inline_data.data)))
-            image.save('gemini-native-image.png')
+            image.save('../static/ai_image.png')
             image.show()
 
 #prompt = generatePrompt("Sorry, your grandma died. RIP.")
-prompt = generatePrompt("There's a whole lotta shamrocks on a green screen over here")
+prompt = generatePrompt("I kissed a gull and I liked it.")
 generateImage(prompt)

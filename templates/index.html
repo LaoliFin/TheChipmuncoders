@@ -16,7 +16,7 @@
     <div class="main-container">
         <div class="left-panel">
             <textarea class="text-input" id="textInput" placeholder="Enter your text here..."required></textarea>
-            <button class="generate-button" >Generate</button>
+            <button class="generate-button all-buttons" >Generate</button>
         </div>
         <div class="right-panel">
             <div class="options-container">
@@ -30,20 +30,22 @@
                 </div>
 				<div class="style-dropdown">
 					<label for="tune-style">Tune Style:</label>
-					<select id="tune-style">
-						<option value="jig">Jig</option>
-						<option value="reel">Reel</option>
-						<option value="slip jig">Slip Jig</option>
-						<option value="hornpipe">Hornpipe</option>
-						<option value="polka">Polka</option>
-						<option value="slide">Slide</option>
-						<option value="waltz">Waltz</option>
-						<option value="barndance">Barndance</option>
-						<option value="strathspey">Strathspey</option>
-						<option value="three-two">Three-two</option>
-						<option value="mazurka">Mazurka</option>
-						<option value="march">March</option>
-					</select>
+					<div class="select-wrapper">
+						<select id="tune-style">
+							<option value="jig">Jig</option>
+							<option value="reel">Reel</option>
+							<option value="slip jig">Slip Jig</option>
+							<option value="hornpipe">Hornpipe</option>
+							<option value="polka">Polka</option>
+							<option value="slide">Slide</option>
+							<option value="waltz">Waltz</option>
+							<option value="barndance">Barndance</option>
+							<option value="strathspey">Strathspey</option>
+							<option value="three-two">Three-two</option>
+							<option value="mazurka">Mazurka</option>
+							<option value="march">March</option>
+						</select>
+					</div>
 				</div>
             </div>
             <div class="output-container">
@@ -55,9 +57,9 @@
             <div class="controls-container">
                  <div class="controls">
                     <audio id="audio-player" controls style="display:none;"></audio>
-                    <button class="play-button">Play</button>
-                    <button class="download-button">Download</button>
-                    <button class="go-to-card-button" onclick="openCard()">Go To Card</button>
+                    <button class="play-button all-buttons">Play</button>
+                    <button class="download-button all-buttons">Download</button>
+                    <button class="go-to-card-button all-buttons" onclick="openCard()">Go To Card</button>
                 </div>
             </div>
         </div>
