@@ -7,6 +7,8 @@ import requests
 
 def get_song_midi(songdata):
 	id = songdata.get('tune_id')
+	meter = songdata.get('meter')
+	abc = songdata.get('abc')
 	print(id)
 	url = f"https://thesession.org/tunes/{id}/abc"
 	response = requests.get(url)
@@ -16,7 +18,7 @@ def get_song_midi(songdata):
 
 	midi_path = f"tune_{songdata.get('tune_id')}.mid"
 	music.write('midi', fp = midi_path)
-	return midi_path
+	return midi_path, meter, abc
 
 def get_tune(style):
 	tunes = []
@@ -28,8 +30,8 @@ def get_tune(style):
 				tunes.append(song)
 		
 	melody = random.choice(tunes)
-	midi = get_song_midi(melody)
-	return midi
+	midi, meter, abc = get_song_midi(melody)
+	return midi, meter, abc
 
 def synthesize_singing(midi, lyrics, output):
 	subprocess.run([

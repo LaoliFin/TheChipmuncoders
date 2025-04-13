@@ -24,14 +24,16 @@ def generate_singing():
 	data = request.get_json()
 	lyrics = data.get('text')
 	style = data.get('style')
-	
-	lyrics = irishify(lyrics)
+
+	melody_file, meter, abc = get_tune(style)
+	melody_file = transpose_down(melody_file)
+
+	lyrics = irishify(lyrics, meter, abc)
+	print(lyrics)
 	lyrics_file = "lyrics.txt"
 	with open(lyrics_file, "w", encoding="utf-8") as f:
 		f.write(lyrics)
 
-	melody_file = get_tune(style)
-	melody_file = transpose_down(melody_file)
 	generated_singing = "output.wav"
 	synthesize_singing(melody_file, lyrics_file, generated_singing)
 
