@@ -7,13 +7,20 @@ Our project is a website called FOLKIFY that creates digital greeting cards in a
 In addition to the music, the app also generates a personalized digital greeting card. It includes a summarized version of the original message along with an AI-generated image that reflects the tone or theme of that summary. Both the song and the card can be downloaded and shared.
 
 TECH STACK
-The main coding languages we used are python, html and css. Beside that we have also used the library midi2
+The main coding languages we used are python, html with some JavaScript and css. Our backend uses Flask. For retrieving the melodies we used the database [the session](https://thesession.org/) API. We also used many python libraries, such as [music21](https://music21-mit.blogspot.com/). Beside that we have also used [midi2voice](https://github.com/mathigatti/midi2voice) for generating singing. The image prompts were generated with Gemini's text generator and the subsequent images were created by feeding the prompt to Gemini's image generator. We also the Roo extension in VS Code to help us with html formatting and debugging.
 
 FEATURES
 The main feature is generating Irish folk-style songs using the user’s custom message as lyrics. 
 Besides that it creates a downloadable digital card with a summary of the message and an AI-generated image based on that summary.It also includes optional voice filters like choir and chipmunks
 
 SETUP
+To run the server locally:
+- midi2voice requires [MuseScore3](https://musescore.org/en/download) to be installed on the computer
+- to insure all python libraries are installed use: pip install -r requirements.txt in the root directory
+- run the server by typing: python (or py) app.py
+- open the correct port in your preferable browser
+- enjoy the chaos :D
+  
 To use our web-app:
 - Go to the website URL
 - Input your message in the left text field.
