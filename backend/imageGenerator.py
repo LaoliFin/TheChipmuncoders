@@ -37,7 +37,7 @@ def generateImage(prompt):
         elif part.inline_data is not None:
             image = Image.open(BytesIO((part.inline_data.data)))
             image.save('./static/ai_image.png')
-            image.show()
+            #image.show()
 
 #prompt = generatePrompt("Sorry, your grandma died. RIP.")
 #prompt = generatePrompt("I kissed a gull and I liked it.")
