@@ -12,7 +12,12 @@ def index():
 
 @app.route('/card')
 def card():
-	return render_template('card.html')
+    try:
+        with open("lyrics.txt", "r", encoding="utf-8") as f:
+            lyrics = f.read()
+    except FileNotFoundError:
+        lyrics = "No lyrics found."
+    return render_template('card.html', lyrics=lyrics)
 
 @app.route('/generate', methods=['POST'])
 def generate_singing():

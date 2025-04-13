@@ -59,7 +59,7 @@
                     <audio id="audio-player" controls style="display:none;"></audio>
                     <button class="play-button all-buttons">Play</button>
                     <button class="download-button all-buttons">Download</button>
-                    <button class="go-to-card-button all-buttons" onclick="openCard()">Go To Card</button>
+                    <button class="go-to-card-button all-buttons" onclick="window.location.href = '/card';">Go To Card</button>
                 </div>
             </div>
         </div>
@@ -101,9 +101,6 @@
 			}
 		});
 
-        function openCard() {
-            window.open('/card', '_blank');
-        }
 	</script>		
 </body>
 </html>

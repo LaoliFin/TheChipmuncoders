@@ -12,9 +12,10 @@
 </head>
 <body>
     <div class="back-button">
-            <button class="back-to-index-button" onclick="window.location.href = '/';">Back</button>
+        <button class="back-to-index-button all-buttons" onclick="window.location.href = '/';">Back</button>
     </div>
-    <div class="card-container">
+        <div class="card-container">
+        
         <div class="card">
             <div class="front">
                 <img src="{{ url_for('static', filename='ai_image.png') }}" alt="Card Image">
@@ -23,23 +24,28 @@
             <div class="back">
                 <div class="left">
                     <img src="{{ url_for('static', filename='alvin.jpg') }}" alt="Card Image">
+                    <div class="page-turn"></div>
                 </div>
                 <div class="right">
-                    <p id="cardText">This is where the text from index.html will go.</p>
+                    <p id="cardText">{{ lyrics }}</p>
                 </div>
             </div>
         </div>
-        <button id="downloadButton">Download</button>
+       <button class="download-button-two all-buttons">Download</button> 
     </div>
+        
+    
 
     <script>
-        const pageTurn = document.querySelector('.page-turn');
+        const pageTurn = document.querySelectorAll('.page-turn');
         const card = document.querySelector('.card');
         const cardText = document.getElementById('cardText');
         const downloadButton = document.getElementById('downloadButton');
 
-        pageTurn.addEventListener('click', () => {
-            card.classList.toggle('flipped');
+        pageTurn.forEach(turn => {
+            turn.addEventListener('click', () => {
+                card.classList.toggle('flipped');  
+            });
         });
 
         async function fetchText() {
@@ -69,9 +75,6 @@
             alert('Download functionality not implemented yet.');
         });
 
-        function openIndex() {
-            window.open('/index', '_blank');
-        }
     </script>
 </body>
 </html>
