@@ -60,7 +60,8 @@
             <div class="controls-container">
                  <div class="controls">
                     <!--<button class="play-button all-buttons">Play</button>-->
-                    <button class="download-button all-buttons">Download</button>
+                    <button id="download-button" class="download-button all-buttons">Download</button>
+					<a id="hidden-download-link" style="display: none;"></a>
                     <button class="go-to-card-button all-buttons" onclick="window.location.href = '/card';">Go To Card</button>
                 </div>
             </div>
@@ -68,6 +69,8 @@
     </div>
 
     <script>
+		let audioURL = null; // global reference to the blob URL
+
 		document.querySelector('.generate-button').addEventListener('click', async () => {
 			const text = document.querySelector('.text-input').value;
 			const style = document.getElementById('tune-style').value;
@@ -82,16 +85,16 @@
 		
 			if (response.ok) {
 				const blob = await response.blob();
-				const url = URL.createObjectURL(blob);
+				audioURL = URL.createObjectURL(blob);
 				
 				const audio = document.getElementById('audio-player');
 				const audioWrapper = document.getElementById('audio-wrapper');
-				audio.src = url;
+				audio.src = audioURL;
 				audioWrapper.style.display = 'block';
 				audio.load();
 		
-				document.querySelector('.download-button').setAttribute('href', url);
-				document.querySelector('.download-button').setAttribute('download', 'generated_singing.wav');
+				//document.querySelector('.download-button').setAttribute('href', audioURL);
+				//document.querySelector('.download-button').setAttribute('download', 'generated_singing.wav');
 			} else {
 				alert('Failed to generate audio. Please try again.');
 			}
@@ -134,6 +137,19 @@
 		audio.addEventListener('play', startAnimation);
 		audio.addEventListener('pause', stopAnimation);
 		audio.addEventListener('ended', stopAnimation);
+
+		document.getElementById('download-button').addEventListener('click', () => {
+			if (!audioURL) {
+				alert('No audio file available yet!');
+				return;
+			}
+
+			const hiddenLink = document.getElementById('hidden-download-link');
+			hiddenLink.href = audioURL;
+			hiddenLink.download = 'generated_singing.wav';
+			hiddenLink.click(); // simulate click to download
+		});
+
 	</script>		
 </body>
 </html>

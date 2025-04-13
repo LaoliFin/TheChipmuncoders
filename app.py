@@ -47,7 +47,7 @@ def generate_singing():
 			raise RuntimeError("No output generated.")
 	except Exception as e:
 		print(f"[ERROR] Synthesis failed: {e}")
-		generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
+	generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
 
 	#if os.path.exists(lyrics_file):
 	#	os.remove(lyrics_file)
