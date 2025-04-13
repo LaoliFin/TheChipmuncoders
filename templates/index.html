@@ -54,7 +54,7 @@
 					<div class="audio-wrapper" id="audio-wrapper" style="display:none;">
 						<audio id="audio-player" controls></audio>
 					</div>
-                    <img src="../static/chip1.png" alt="zacasen_alvin2">
+                    <img id="chipmunk" src="../static/chip1.png" alt="chippy">
                 </div>
             </div>
             <div class="controls-container">
@@ -97,13 +97,43 @@
 			}
 		});
 		
-		document.querySelector('.play-button').addEventListener('click', () => {
+		/*document.querySelector('.play-button').addEventListener('click', () => {
 			const audio = document.getElementById('audio-player');
 			if (audio.src) {
 				audio.play();
 			}
-		});
+		});*/
 
+        function openCard() {
+            window.open('/card', '_blank');
+        }
+
+		/* AUDIO ANIMATION LOGIC */
+		const audio = document.getElementById('audio-player');
+		const image = document.getElementById('chipmunk');
+
+		let animationInterval;
+		let currentFrame = 0;
+		const frames = ["../static/chip2.png", "../static/chip3.png"];
+
+		function startAnimation() {
+			console.log("Animation starting");
+			animationInterval = setInterval(() => {
+			currentFrame = (currentFrame + 1) % frames.length;
+			image.src = frames[currentFrame];
+			}, 200); // Change every 300ms (adjust as needed)
+		}
+
+		
+		function stopAnimation() {
+			console.log("Animation stopping");
+			clearInterval(animationInterval);
+			image.src = "../static/chip1.png"; // Reset to default image
+		}
+
+		audio.addEventListener('play', startAnimation);
+		audio.addEventListener('pause', stopAnimation);
+		audio.addEventListener('ended', stopAnimation);
 	</script>		
 </body>
 </html>
