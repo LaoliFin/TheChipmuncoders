@@ -27,7 +27,7 @@
             </div>
             <div id = "back" class="back">
                 <div class="left">
-                    <img src="{{ url_for('static', filename='ai_image.png') }}" alt="Card Image">
+                    <img id="backImage" src="{{ url_for('static', filename='ai_image.png') }}" alt="Card Image">
                     <div class="page-turn"></div>
                 </div>
                 <div class="right">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-       <button class="download-button-two all-buttons" onclick="saveDiv('back','card')">Download</button> 
+       <button id="downloadButton" class="download-button-two all-buttons" disabled>Download</button> 
     </div>
         
     
@@ -47,17 +47,40 @@
 
         pageTurn.forEach(turn => {
             turn.addEventListener('click', () => {
-                card.classList.toggle('flipped');  
+                card.classList.toggle('flipped');
+                downloadButton.disabled = false;  
             });
         });
 
 
-        /*downloadButton.addEventListener('click', () => {
-            // Implement download functionality here (e.g., using canvas to create an image)
-            alert('Download functionality not implemented yet.');
-        });*/
+        downloadButton.addEventListener('click', async () => {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
 
-        const { jsPDF } = window.jspdf;
+            // First page: image
+            const backImage = document.getElementById('backImage');
+            const imgCanvas = await html2canvas(backImage, { useCORS: true });
+            const imgData = imgCanvas.toDataURL('image/png');
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            const imgRatio = imgCanvas.width / imgCanvas.height;
+            const newImgHeight = pdfWidth / imgRatio;
+
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, newImgHeight);
+
+            // Second page: text
+            pdf.addPage();
+            const text = document.getElementById('cardText').innerText;
+
+            // Attempt to use a custom font (fallbacks to default if needed)
+            pdf.setFont('Caveat', 'normal'); // Font name must be embedded to actually show
+            pdf.setFontSize(20);
+            pdf.text(text, 20, 40);
+
+            pdf.save('card.pdf');
+        });
 
     </script>
 </body>
