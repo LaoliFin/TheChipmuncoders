@@ -51,7 +51,7 @@ def generate_singing():
 			raise RuntimeError("No output generated.")
 	except Exception as e:
 		print(f"[ERROR] Synthesis failed: {e}")
-	generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
+		generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
 
 	chipmunk_mode = 'chipmunk_mode' in request.form
 	if chipmunk_mode:

@@ -10,7 +10,7 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def generatePrompt(lyrics):
-    prompt = "Give me one ai image generating prompt based on this text: " + lyrics
+    prompt = "Give me one ai image generating prompt based on this text, without using special characters: " + lyrics
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=[prompt]
