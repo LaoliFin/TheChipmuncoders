@@ -12,6 +12,13 @@ body {
     
 }
 
+.caveat-pisavaCard {
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
 .card-container {
     position: relative;
     width: 80%;
@@ -60,6 +67,8 @@ body {
     z-index: 2;
     margin-top: -20px;
     margin-bottom: 20px;
+    font-family: "Caveat", cursive;
+    font-size: 22px;
 }
 
 .back .left {
