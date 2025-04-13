@@ -51,13 +51,15 @@
             <div class="output-container">
                 <div class="image-placeholder">
                     <!-- Image will go here -->
+					<div class="audio-wrapper" id="audio-wrapper" style="display:none;">
+						<audio id="audio-player" controls></audio>
+					</div>
                     <img src="../static/chip1.png" alt="zacasen_alvin2">
                 </div>
             </div>
             <div class="controls-container">
                  <div class="controls">
-                    <audio id="audio-player" controls style="display:none;"></audio>
-                    <button class="play-button all-buttons">Play</button>
+                    <!--<button class="play-button all-buttons">Play</button>-->
                     <button class="download-button all-buttons">Download</button>
                     <button class="go-to-card-button all-buttons" onclick="openCard()">Go To Card</button>
                 </div>
@@ -83,8 +85,9 @@
 				const url = URL.createObjectURL(blob);
 				
 				const audio = document.getElementById('audio-player');
+				const audioWrapper = document.getElementById('audio-wrapper');
 				audio.src = url;
-				audio.style.display = 'block';
+				audioWrapper.style.display = 'block';
 				audio.load();
 		
 				document.querySelector('.download-button').setAttribute('href', url);

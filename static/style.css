@@ -483,6 +483,21 @@ input[type="checkbox"]:checked::after {
     transform: translate(-50%, -50%) scale(1);
 }
 
+.audio-wrapper {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: #422800 4px 4px 0 0;
+    margin-bottom: 1rem;
+}
+
+#audio-player {
+    width: 100%;
+    accent-color: #422800;
+}
+
+
 /* Basic Responsiveness */
 @media (max-width: 768px) {
     .main-container {
