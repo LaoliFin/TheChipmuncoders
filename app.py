@@ -40,8 +40,14 @@ def generate_singing():
 	melody_file = get_tune(style)
 	melody_file = transpose_down(melody_file)
 	generated_singing = "output.wav"
-	synthesize_singing(melody_file, lyrics_file, generated_singing)
-	print("A smo tu?")
+	try:
+		synthesize_singing(melody_file, lyrics_file, generated_singing)
+		print("Synthesis complete.")
+		if not os.path.exists(generated_singing) or os.path.getsize(generated_singing) == 0:
+			raise RuntimeError("No output generated.")
+	except Exception as e:
+		print(f"[ERROR] Synthesis failed: {e}")
+		generated_singing = "backup_plan.wav"  # Use a pre-generated fallback file
 
 	#if os.path.exists(lyrics_file):
 	#	os.remove(lyrics_file)
