@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_file
 from backend.melodyProcessing import get_tune, synthesize_singing, transpose_down
 from backend.lyricsParser import irishify
+from backend.imageGenerator import generateImage
 import os
 
 app = Flask(__name__)
@@ -31,6 +32,7 @@ def generate_singing():
 	style = data.get('style')
 	
 	lyrics = irishify(lyrics)
+	generateImage(lyrics)
 	lyrics_file = "lyrics.txt"
 	with open(lyrics_file, "w", encoding="utf-8") as f:
 		f.write(lyrics)
@@ -39,9 +41,10 @@ def generate_singing():
 	melody_file = transpose_down(melody_file)
 	generated_singing = "output.wav"
 	synthesize_singing(melody_file, lyrics_file, generated_singing)
+	print("A smo tu?")
 
-	if os.path.exists(lyrics_file):
-		os.remove(lyrics_file)
+	#if os.path.exists(lyrics_file):
+	#	os.remove(lyrics_file)
 	if os.path.exists(melody_file):
 		os.remove(melody_file)
 	return send_file(generated_singing, as_attachment=False, mimetype='audio/wav')

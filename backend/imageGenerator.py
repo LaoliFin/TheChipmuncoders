@@ -20,6 +20,7 @@ def generatePrompt(lyrics):
 
 def generateImage(prompt):
 
+    prompt = generatePrompt(prompt)
     contents = (prompt)
 
     response = client.models.generate_content(
@@ -35,9 +36,9 @@ def generateImage(prompt):
             print(part.text)
         elif part.inline_data is not None:
             image = Image.open(BytesIO((part.inline_data.data)))
-            image.save('../static/ai_image.png')
+            image.save('./static/ai_image.png')
             image.show()
 
 #prompt = generatePrompt("Sorry, your grandma died. RIP.")
-prompt = generatePrompt("I kissed a gull and I liked it.")
-generateImage(prompt)
+#prompt = generatePrompt("I kissed a gull and I liked it.")
+#generateImage(prompt)

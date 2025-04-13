@@ -32,15 +32,26 @@ def get_tune(style):
 	return midi
 
 def synthesize_singing(midi, lyrics, output):
-	subprocess.run([
-		"python", "-m", "midi2voice",
-		"-l", lyrics,
-		"-m", midi
-	], check=True)
+    try:
+        result = subprocess.run([
+            "python", "-m", "midi2voice",
+            "-l", lyrics,
+            "-m", midi
+        ], capture_output=True, text=True, check=True)
+        
+        if result.returncode != 0:
+            print(f"Error in subprocess: {result.stderr}")
+            print(f"Output: {result.stdout}")
+            return
 
-	if os.path.exists("voice.wav"):
-		os.rename("voice.wav", output)
-	return
+        if os.path.exists("voice.wav"):
+            os.rename("voice.wav", output)
+    except subprocess.CalledProcessError as e:
+        print(f"Subprocess failed: {e.stderr}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return
+
 
 def transpose_down(midi):
 	high_midi = converter.parse(midi)
